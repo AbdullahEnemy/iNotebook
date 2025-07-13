@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const NotesSchema = new mongoose.Schema({
+const {Schema}=mongoose;
+const NotesSchema = new Schema({
     WebTransportBidirectionalStream: {
         type: String,
         required: true,
