@@ -6,11 +6,20 @@ const signupHandler=async(req,res)=>{
     if(!errors.isEmpty()){
         return res.status(400).json({erros:errors.array()});
     }
-    console.log(req.body);
+    const email=req.body.email;
+    const user=await User.findOne({email});
+    if(user){
+        res.status(400).json("User Already Exists");
+    }
+    try{
     const data=req.body;
-    const user=  User(data);
-    user.save()
-    res.send(user);
+    const newUser=  await User(data);
+    newUser.save()
+    res.status(201).json({message:"User Successfully Created"});
+    }catch(err){
+        res.status(500).json({message:"An error has occured"});
+    }
+
        
 }
 module.exports = {  signupHandler};
