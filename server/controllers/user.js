@@ -18,7 +18,6 @@ const signupHandler=async(req,res)=>{
     try{
     const salt=await bcrypt.genSalt(10);
     const secPass=await bcrypt.hash(password,salt);
-
     const newUser=new User();
     newUser.name=name;
     newUser.password=secPass;
@@ -34,7 +33,8 @@ const signupHandler=async(req,res)=>{
     }catch(err){
         res.status(500).json({message:"An error has occured"});
     }
-
-       
 }
-module.exports = {  signupHandler};
+const loginHandler =async(res,req)=>{
+
+}
+module.exports = {  signupHandler,loginHandler};
