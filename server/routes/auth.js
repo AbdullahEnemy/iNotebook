@@ -14,7 +14,7 @@ router.post(
 );
 router.post('/loginUser',  [
     body('email').isEmail().withMessage('Invalid email address'),
-    body('password').isLength({ min: 8 }).withMessage('Password must be at least 8 characters'),
+    body('password').exists().withMessage('Password cannot be empty').isLength({ min: 8 }).withMessage('Password must be at least 8 characters'),
   ],userControllers.loginHandler
 );
 module.exports=router;

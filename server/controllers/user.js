@@ -25,7 +25,8 @@ const signupHandler=async(req,res)=>{
     await newUser.save()
     const data={
         user:{
-            id:newUser.id
+            id:newUser.id,
+            email:newUser.email
         }
     }
     const authToken=jwt.sign(data,secretToken);
@@ -34,7 +35,31 @@ const signupHandler=async(req,res)=>{
         res.status(500).json({message:"An error has occured"});
     }
 }
-const loginHandler =async(res,req)=>{
+const loginHandler =async(req,res)=>{
+    try{
+    const { email, password } = req.body;
 
+    const user=await User.findOne({email});
+    if(!user){
+        return res.status(400).json("Please try to login with correct credentials");
+    }
+    const passwordComp=await bcrypt.compare(password,user.password);
+    if(!passwordComp)
+        {
+            return res.status(400).json("Please try to login with correct credentials");
+        }
+    const data={
+        user:{
+            id:user.id,
+            email:user.email
+        }
+    }
+    const authToken=jwt.sign(data,secretToken);
+    res.status(200).json({message:"User login Successfully",Token:authToken});    
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).json({message:"An error has occured"});
+    }   
 }
 module.exports = {  signupHandler,loginHandler};
