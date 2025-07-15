@@ -62,4 +62,8 @@ const loginHandler =async(req,res)=>{
         res.status(500).json({message:"An error has occured"});
     }   
 }
-module.exports = {  signupHandler,loginHandler};
+const getUserHandler=async(req,res)=>{
+
+}
+
+module.exports = {  signupHandler,loginHandler,getUserHandler};

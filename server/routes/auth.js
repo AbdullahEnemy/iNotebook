@@ -1,6 +1,7 @@
 const express=require("express");
 const router =express.Router();
 const User=require('../models/User');
+const verify=require('../middleware/jwt')
 const { body, validationResult } = require('express-validator');
 const userControllers=require('../controllers/user')
 router.post(
@@ -18,3 +19,4 @@ router.post('/loginUser',  [
   ],userControllers.loginHandler
 );
 module.exports=router;
+router.get('/getuser',verify.checkToken,userControllers.getUserHandler);
