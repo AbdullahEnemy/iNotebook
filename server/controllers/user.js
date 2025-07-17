@@ -32,6 +32,7 @@ const signupHandler=async(req,res)=>{
     const authToken=jwt.sign(data,secretToken,{expiresIn:"12h"});
     return res.status(201).json({message:"User Successfully Created",Token:authToken});
     }catch(err){
+        console.log(err);
         return res.status(500).json({message:"An error has occured"});
     }
 }
@@ -58,12 +59,13 @@ const loginHandler =async(req,res)=>{
     return res.status(200).json({message:"User login Successfully",Token:authToken});    
     }
     catch(err){
+        console.log(err);
        return  res.status(500).json({message:"An error has occured"});
     }   
 }
 const getUserHandler=async(req,res)=>{
     try{
-        const userId=req.user.id;
+    const userId=req.user.id;
     const user=await User.findById(userId);
     return res.status(200).json({
       message: "user found",
@@ -74,6 +76,7 @@ const getUserHandler=async(req,res)=>{
     });
     }
     catch(err){
+        console.log(err);
         return res.status(500).json({message:"An error has occured"});
     }
 
