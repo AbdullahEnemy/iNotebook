@@ -1,7 +1,7 @@
 const express=require("express");
 const router =express.Router();
 const User=require('../models/User');
-const verify=require('../middleware/jwt')
+const verify=require('../middleware/jwt');
 const { body, validationResult } = require('express-validator');
 const userControllers=require('../controllers/user')
 router.post(
