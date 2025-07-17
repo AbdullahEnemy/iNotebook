@@ -63,7 +63,7 @@ const loginHandler =async(req,res)=>{
 }
 const getUserHandler=async(req,res)=>{
     try{
-        userId=req.user.id;
+        const userId=req.user.id;
     const user=await User.findById(userId);
     return res.status(200).json({
       message: "user found",
