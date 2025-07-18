@@ -1,3 +1,4 @@
+
 const Notes=require("../models/Notes");
 const User=require('../models/User');
 const {body,validationResult}=require('express-validator');
@@ -38,4 +39,30 @@ const addNotes=async(req,res)=>{
     }
 
 }
-module.exports={getAllNotes,addNotes};
+const updateNotes=async(req,res)=>{
+   const userId=req.user.id;
+   const notesId=req.params.id;
+   let note=await Notes.findById(notesId);
+   if(!note){
+    return res.status(404).json({message:"Not Found"})
+   }
+   if(userId!==note.user.toString()){
+    return res.status(403).json({message:"Unauthorized action"})
+   }
+   const{title,description,tag}=req.body;
+   try
+   {
+    const newNotes={};
+    if(title){newNotes.title=title};
+    if(description){newNotes.description=description};
+    if(tag){newNotes.tag=tag};
+    note=await Notes.findByIdAndUpdate(notesId,{$set:newNotes},{new:true});
+    return res.status(200).json({message:"Note Updated successfully"});
+   }
+   catch(err){
+          console.log(err);
+       return  res.status(500).json({message:"Falied to update note"});
+
+   }
+}
+module.exports={getAllNotes,addNotes,updateNotes};
