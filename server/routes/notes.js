@@ -9,9 +9,10 @@ router.post("/addnotes",
     body('title').isLength({ min: 3}).withMessage('Enter a valid Title'),
     body('description').isLength({ min: 5}).withMessage('Description must be atleast 5 characters')
   ],verify.checkToken,notesControllers.addNotes);
-  router.put("/updatenotes/:id",
+router.put("/updatenotes/:id",
   [
     body('title').optional().isLength({ min: 3}).withMessage('Enter a valid Title'),
     body('description').optional().isLength({ min: 5}).withMessage('Description must be atleast 5 characters')
   ],verify.checkToken,notesControllers.updateNotes);
+router.delete("/deletenotes/:id",verify.checkToken,notesControllers.deleteNote);
 module.exports=router;

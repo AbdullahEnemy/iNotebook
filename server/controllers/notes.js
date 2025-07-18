@@ -60,9 +60,29 @@ const updateNotes=async(req,res)=>{
     return res.status(200).json({message:"Note Updated successfully"});
    }
    catch(err){
-          console.log(err);
-       return  res.status(500).json({message:"Falied to update note"});
+        console.log(err);
+        return  res.status(500).json({message:"Falied to update note"});
 
    }
 }
-module.exports={getAllNotes,addNotes,updateNotes};
+const deleteNote=async(req,res)=>{
+   const userId=req.user.id;
+   const notesId=req.params.id;
+   let note=await Notes.findById(notesId);
+   if(!note){
+    return res.status(404).json({message:"Not Found"})
+   }
+   if(userId!==note.user.toString()){
+    return res.status(403).json({message:"Unauthorized action"})
+   }
+   try{
+        const deletenote=await Notes.findByIdAndDelete(notesId);
+        return res.status(200).json({message:"Note deleted successfully"},deletenote);
+   }
+   catch(err){
+        console.log(err);
+        return  res.status(500).json({message:"Falied to delete note"});
+   }
+
+}
+module.exports={getAllNotes,addNotes,updateNotes,deleteNote};
