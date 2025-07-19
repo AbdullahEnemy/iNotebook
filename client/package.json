@@ -7,11 +7,17 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "both": "concurrently \"npm run dev\" \"node -r dotenv/config ../server/index.js dotenv_config_path=../server/.env\""
+
   },
   "dependencies": {
+    "concurrently": "^9.2.0",
+    "dotenv": "^17.2.0",
+    "nodemon": "^3.1.10",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "react-router-dom": "^7.7.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.30.1",
