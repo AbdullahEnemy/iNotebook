@@ -5,7 +5,10 @@ import { NoteItem } from "./NoteItem";
 import { AddNote } from "./AddNote";
 export const Notes = () => {
       const context=useContext(noteContext);
-      const {notes,setNotes,addNote}=context;
+      const {notes,setNotes,addNote,getAllNotes}=context;
+      useEffect(()=>{
+        getAllNotes();
+      },[])
   return (
     <>
     <AddNote></AddNote>
