@@ -5,17 +5,23 @@ import { NoteItem } from "./NoteItem";
 import { AddNote } from "./AddNote";
 export const Notes = () => {
       const context=useContext(noteContext);
-      const {notes,setNotes,addNote,getAllNotes}=context;
+      const {notes,getAllNotes}=context;
       useEffect(()=>{
-        getAllNotes();
+        try{ getAllNotes();}
+        catch(err)
+        {
+            console.log(err)
+        }
+       
+
       },[])
   return (
     <>
     <AddNote></AddNote>
       <div className="row my-3">
         <h2>Your Notes</h2>
-        {notes.map((note) => {
-            return <NoteItem key={note._id} note={note} />;;
+        {notes.map((note,idx) => {
+            return <NoteItem key={note._id|| idx} note={note} />;
         })}
       </div>
     </>

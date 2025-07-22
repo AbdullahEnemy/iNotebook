@@ -17,7 +17,7 @@ const NoteState = (props) => {
     console.log(json);
     const newNotes=json.notes;
     console.log(newNotes);
-    setNotes(newNotes);
+    setNotes(newNotes)
   };
   
   const [notes, setNotes] = useState([]);
@@ -30,19 +30,8 @@ const NoteState = (props) => {
       },
       body: JSON.stringify({ title, description, tag }),
     });
-    const json = await response.json;
-
-    let note = {
-      _id: "",
-      user: "687959f35cef7e4c76af0a29",
-      title: title,
-      description: description,
-      tag: tag,
-      date: "2025-07-17T20:16:08.926Z",
-      __v: 0,
-    };
-    console.log("adding a new note");
-    setNotes(notes.concat(note));
+    const json = await response.json();
+    setNotes(notes.concat(json.savedNotes));
   };
   const editNote = async (id, title, description, tag) => {
     const authToken =
@@ -74,9 +63,9 @@ const NoteState = (props) => {
         authToken: authToken,
       },
     });
-    const json = await response.json;
+    const json = await response.json();
     console.log(id);
-    let newNotes = notes.filter((note) => {
+    const newNotes = notes.filter((note) => {
       return note._id !== id;
     });
     setNotes(newNotes);
