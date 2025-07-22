@@ -31,7 +31,7 @@ const addNotes=async(req,res)=>{
         user: req.user.id  
     });
     const savedNotes=await newNote.save();
-    return res.status(201).json({message:"Note saved Successfully"});
+    return res.status(201).json({message:"Note saved Successfully",savedNotes});
     }
     catch(err){
         console.log(err);
