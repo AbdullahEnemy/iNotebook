@@ -33,7 +33,7 @@ const NoteState=(props)=>{
         }
     ]
      const [notes,setNotes]=useState(n)
-    const addNote=(title,description,tag)=>{
+    const addNote=async(title,description,tag)=>{
         let note={
             "_id": "",
             "user": "687959f35cef7e4c76af0a29",
@@ -46,10 +46,25 @@ const NoteState=(props)=>{
         console.log("adding a new note");
         setNotes(notes.concat(note))
     }
-    const editNote=()=>{
+    const editNote=async(id,title,description,tag)=>{
+        for(let idx=0;idx<notes.length;idx++)
+        {
+            const element=notes[idx];
+            if(element._id===id)
+            {
+                element.title=title;
+                element.tag=tag;
+                element.description=description;
+                break;
+            }
+        }
         
     }
-    const deleteNote=()=>{
+    const deleteNote=async(id)=>{
+        console.log(id);
+        let newNotes=notes.filter((note)=>{return note._id!==id;
+        })
+        setNotes(newNotes);
         
     }
     return (
