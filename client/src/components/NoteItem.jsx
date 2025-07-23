@@ -3,7 +3,7 @@ import { useState, useContext, useEffect } from "react";
 import noteContext from "../context/notes/noteContext";
 
 export const NoteItem = (props) => {
-  const { note } = props;
+  const { note,updateNote } = props;
   const context = useContext(noteContext);
   const { deleteNote} = context;
   return (
@@ -18,7 +18,7 @@ export const NoteItem = (props) => {
                     deleteNote(note._id);
                 }
                 }></i>
-                <i className="fa-solid fa-pen-to-square mx-1"></i>
+                <i className="fa-solid fa-pen-to-square mx-1" onClick={()=>{updateNote(note)}}></i>
               </div>
             </div>
             <p className="card-text">{note.description}</p>
