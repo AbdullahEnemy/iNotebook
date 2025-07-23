@@ -14,7 +14,7 @@ const signupHandler=async(req,res)=>{
     const name=req.body.name;
     const user=await User.findOne({email});
     if(user){
-       return  res.status(400).json("User Already Exists",success);
+       return  res.status(400).json({message:"User Already Exists",success});
     }
     try{
     const salt=await bcrypt.genSalt(10);
@@ -45,7 +45,7 @@ const loginHandler =async(req,res)=>{
 
     const user=await User.findOne({email});
     if(!user){
-        return res.status(400).json("Please try to login with correct credentials",success);
+        return res.status(400).json({message:"Please try to login with correct credentials",success});
     }
     const passwordComp=await bcrypt.compare(password,user.password);
     if(!passwordComp)
