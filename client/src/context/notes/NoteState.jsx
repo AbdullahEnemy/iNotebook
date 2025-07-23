@@ -3,8 +3,7 @@ import noteContext from "./noteContext";
 import { useState } from "react";
 const NoteState = (props) => {
   const host = "http://localhost:3000/api/notes/";
-  const authToken =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjg3OTU5ZjM1Y2VmN2U0Yzc2YWYwYTI5IiwiZW1haWwiOiJvd2Fpc0BnbWFpbC5jb20ifSwiaWF0IjoxNzUzMTgzODc3fQ.nLQ3cUtBP1rkthyp_GeSFIktas1LETQMSJbj0fA26ng";
+  const authToken =localStorage.getItem("authToken")
   const getAllNotes = async () => {
     try {
       const response = await fetch(`${host}getallnotes`, {
