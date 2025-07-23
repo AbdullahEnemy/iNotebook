@@ -6,7 +6,7 @@ export const AddNote = () => {
   const [note, setNote] = useState({
     title: "",
     description: "",
-    tag: "default",
+    tag: "",
   });
   const context = useContext(noteContext);
   const { addNote } = context;
@@ -16,6 +16,11 @@ export const AddNote = () => {
   const handleClick = (e) => {
     e.preventDefault();
     addNote(note.title, note.description, note.tag);
+    setNote({
+    title: "",
+    description: "",
+    tag: "",
+  })
   };
   return (
     <>
@@ -33,6 +38,7 @@ export const AddNote = () => {
               name="title"
               aria-describedby="emailHelp"
               onChange={onChange}
+              value={note.title}
              
             />
           </div>
@@ -46,6 +52,7 @@ export const AddNote = () => {
               id="description"
               name="description"
               onChange={onChange}
+              value={note.description}
              
             />
           </div>
@@ -59,6 +66,7 @@ export const AddNote = () => {
               id="tag"
               name="tag"
               onChange={onChange}
+              value={note.tag}
             />
           </div>
 
