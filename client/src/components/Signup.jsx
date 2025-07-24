@@ -44,7 +44,7 @@ export const Signup = () => {
   };
   return (
     <>
-      <div className="container d-flex justify-content-center align-items-center min-vh-100">
+      <div className="container d-flex justify-content-center align-items-center min-vh-80">
   <div className="card shadow-lg p-4" style={{ maxWidth: "500px", width: "100%" }}>
     <h2 className="text-center mb-4 text-primary">
       <i className=" me-2"></i>Sign Up to Continue

@@ -1,6 +1,7 @@
 i{
   cursor: pointer;
 }
+/*css for card in noteitems*/
 .card.hover-shadow {
   transition: transform 0.2s ease, box-shadow 0.3s ease;
 }
@@ -9,6 +10,7 @@ i{
   transform: translateY(-5px);
   box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.15);
 }
+/*css for edit note component*/
 .modal-content {
   transition: all 0.3s ease-in-out;
 }
@@ -20,4 +22,13 @@ i{
 .form-control:focus {
   border-color: #0d6efd;
   box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+/*css for cards in about page*/
+.hover-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+.hover-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
 }
