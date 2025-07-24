@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import alertContext from "../context/alert/alertContext";
+
 export const Signup = () => {
+        const context=useContext(alertContext);
+        const{showAlert}=context;
     const baseUrl="http://localhost:3000/api/auth/createUser";
     const navigate = useNavigate();
   const [credentials, setCredentials] = useState({
@@ -20,10 +24,11 @@ export const Signup = () => {
     const json = await response.json();
     if(json.success){
         localStorage.setItem("authToken",json.Token)
+         showAlert(json.message,"success")
         navigate("/");
         console.log(json.message);
     }else{
-        alert(json.message);
+         showAlert(json.message,"danger")
     }}catch(err){
         console.log(err);
     }

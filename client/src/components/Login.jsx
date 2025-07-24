@@ -21,11 +21,11 @@ export const Login = () => {
     const json = await response.json();
     if(json.success){
         localStorage.setItem("authToken",json.Token)
+        showAlert(json.message,"success")
         navigate("/");
         console.log(json.message);
     }else{
         showAlert(json.message,"danger")
-       
     }}catch(err){
         console.log(err);
     }
