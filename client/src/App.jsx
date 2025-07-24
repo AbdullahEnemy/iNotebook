@@ -9,16 +9,19 @@ import NoteState from "./context/notes/NoteState";
 import { Alert } from "./components/Alert";
 import { Login } from "./components/Login";
 import { Signup } from "./components/Signup";
+import AlertState from "./context/alert/alertState";
 function App() {
+
   return (
     <>
+    <AlertState>
       <NoteState>
         <Router>
           <Navbar> </Navbar>
-          <Alert message="ok"></Alert>
+          <Alert ></Alert>
           <div className="container">
             <Routes>
-              <Route path="/" element={<Home />}></Route>
+              <Route path="/" element={<Home/>}></Route>
 
               <Route path="/about" element={<About />}></Route>
               <Route path="/login" element={<Login />}></Route>
@@ -27,6 +30,7 @@ function App() {
           </div>
         </Router>
       </NoteState>
+      </AlertState>
     </>
   );
 }

@@ -3,9 +3,10 @@ import noteContext from "./noteContext";
 import { useState } from "react";
 const NoteState = (props) => {
   const host = "http://localhost:3000/api/notes/";
-  const authToken =localStorage.getItem("authToken")
+  
   const getAllNotes = async () => {
     try {
+      const authToken =localStorage.getItem("authToken")
       const response = await fetch(`${host}getallnotes`, {
         method: "GET",
         headers: {
@@ -31,6 +32,7 @@ const NoteState = (props) => {
   const [notes, setNotes] = useState([]);
   const addNote = async (title, description, tag) => {
     try {
+      const authToken =localStorage.getItem("authToken")
       const response = await fetch(`${host}addnotes`, {
         method: "POST",
         headers: {
@@ -53,7 +55,8 @@ const NoteState = (props) => {
   };
   const editNote = async (id, title, description, tag) => {
     try {
-            const response = await fetch(`${host}updatenotes/${id}`, {
+      const authToken =localStorage.getItem("authToken")
+       const response = await fetch(`${host}updatenotes/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -88,6 +91,7 @@ const NoteState = (props) => {
   };
   const deleteNote = async (id) => {
     try {
+      const authToken =localStorage.getItem("authToken")
       const response = await fetch(`${host}deletenotes/${id}`, {
         method: "DELETE",
         headers: {

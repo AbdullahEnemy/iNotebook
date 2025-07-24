@@ -20,7 +20,11 @@ export const Notes = () => {
   
   useEffect(() => {
     try {
-      getAllNotes();
+    if (localStorage.getItem("authToken")) {
+    getAllNotes();
+  } else {
+    navigate("/login");
+  }
     } catch (err) {
       console.log(err);
     }

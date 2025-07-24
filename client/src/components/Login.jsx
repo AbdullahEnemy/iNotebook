@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import alertContext from "../context/alert/alertContext";
 
 export const Login = () => {
+    const context=useContext(alertContext);
+    const{showAlert}=context;
     const baseUrl="http://localhost:3000/api/auth/loginUser";
     const navigate = useNavigate();
   const [credentials, setCredentials] = useState({ email: "", password: "" });
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch(`${baseUrl}`, {
+    try{const response = await fetch(`${baseUrl}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -21,8 +24,12 @@ export const Login = () => {
         navigate("/");
         console.log(json.message);
     }else{
-        alert(json.message);
+        showAlert(json.message,"danger")
+       
+    }}catch(err){
+        console.log(err);
     }
+    
 
   };
   const onChange = (e) => {
@@ -45,6 +52,7 @@ export const Login = () => {
             aria-describedby="emailHelp"
             onChange={onChange}
             value={credentials.email}
+            placeholder="Enter your email."
           />
 
         </div>
@@ -59,6 +67,7 @@ export const Login = () => {
             id="password"
             name="password"
             onChange={onChange}
+            placeholder="Enter Password"
           />
         </div>
         <button type="submit" className="btn btn-primary">
