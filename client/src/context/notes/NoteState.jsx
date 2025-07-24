@@ -39,13 +39,15 @@ const NoteState = (props) => {
         body: JSON.stringify({ title, description, tag }),
       });
       const json = await response.json();
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(
-          errorData.message || `HTTP error! status: ${response.status}`
-        );
+      if (json.success) {
+        setNotes(notes.concat(json.savedNotes));
+        showAlert(json.message,"success");
       }
-      setNotes(notes.concat(json.savedNotes));
+        else{
+    showAlert(json.message, "danger");
+    }
+
+      
     } catch (err) {
       console.log(err);
     }
