@@ -45,6 +45,7 @@ export const Signup = () => {
   return (
     <>
       <div className="container">
+        <h2 className="text-center my-4 ">SignUp to Continue</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
             <label htmlFor="name" className="form-label">

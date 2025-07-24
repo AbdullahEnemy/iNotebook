@@ -1,9 +1,15 @@
 import React from "react";
 import { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 export const Navbar = () => {
   let location = useLocation();
+  const navigate = useNavigate();
+  const handleLogout=()=>{
+    localStorage.removeItem("authToken");
+    navigate("/login")
+  }
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
@@ -45,14 +51,33 @@ export const Navbar = () => {
               </Link>
             </li>
           </ul>
-          <form className="d-flex" role="search">
-            <Link className="btn btn-outline-secondary " to="/login" role="button">
-              Login
+          {!localStorage.getItem("authToken") ? (
+            <form className="d-flex" role="search">
+              <Link
+                className="btn btn-outline-secondary "
+                to="/login"
+                role="button"
+              >
+                Login
+              </Link>
+              <Link
+                className="btn btn-outline-secondary mx-2"
+                to="/signup"
+                role="button"
+              >
+                Signup
+              </Link>
+            </form>
+          ) : (
+            <Link
+              className="btn btn-outline-secondary mx-2"
+              to="/login"
+              role="button"
+              onClick={handleLogout}
+            >
+              logout
             </Link>
-            <Link className="btn btn-outline-secondary mx-2" to="/signup" role="button">
-              Signup
-            </Link>
-          </form>
+          )}
         </div>
       </div>
     </nav>

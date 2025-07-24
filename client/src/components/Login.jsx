@@ -39,6 +39,7 @@ export const Login = () => {
   return (
     <>
     <div className="container">
+        <h2 className="text-center my-4 ">Login to Continue</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="email" className="form-label">
