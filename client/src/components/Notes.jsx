@@ -3,12 +3,17 @@ import { useContext, useEffect, useRef,useState } from "react";
 import noteContext from "../context/notes/noteContext";
 import { NoteItem } from "./NoteItem";
 import { AddNote } from "./AddNote";
+import { useNavigate } from "react-router-dom";
+import alertContext from "../context/alert/alertContext";
 // The useRef Hook allows you to persist values between renders.
 // It can be used to store a mutable value that does not cause a re-render when updated.
 // It can be used to access a DOM element directly.
 export const Notes = () => {
     const refClose=useRef(null);
       const ref = useRef(null);
+      const navigate = useNavigate();
+          const contextAlert=useContext(alertContext);
+          const{showAlert}=contextAlert;
   const context = useContext(noteContext);
   const { notes, getAllNotes,editNote } = context;
     const [note, setNote] = useState({
@@ -20,9 +25,10 @@ export const Notes = () => {
   
   useEffect(() => {
     try {
-    if (localStorage.getItem("authToken")) {
+  if (localStorage.getItem("authToken")) {
     getAllNotes();
   } else {
+    showAlert("Please login to continue", "danger");
     navigate("/login");
   }
     } catch (err) {
