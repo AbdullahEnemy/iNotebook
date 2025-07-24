@@ -73,8 +73,15 @@ const NoteState = (props) => {
         break;
       }
     }
+    if (json.success) {
     console.log(newNote);
     setNotes(newNote);
+    showAlert(json.message,"success");
+    }
+    else{
+    showAlert(json.message, "danger");
+    }
+
     } catch (err) {
         console.log(err)
     }
@@ -91,11 +98,19 @@ const NoteState = (props) => {
         },
       });
       const json = await response.json();
-      console.log(json);
+      //console.log(json);
+      console.log(json.success);
+      if (json.success) {
       const newNotes = notes.filter((note) => {
         return note._id !== id;
       });
       setNotes(newNotes);
+      showAlert(json.message,"success");
+      }
+      else{
+         showAlert(json.message, "danger");
+      }
+
     } catch (err) {
       console.log(err);
     }
