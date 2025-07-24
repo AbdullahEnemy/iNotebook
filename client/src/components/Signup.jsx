@@ -1,12 +1,12 @@
-import React, { useState,useContext } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import alertContext from "../context/alert/alertContext";
 
 export const Signup = () => {
-        const context=useContext(alertContext);
-        const{showAlert}=context;
-    const baseUrl="http://localhost:3000/api/auth/createUser";
-    const navigate = useNavigate();
+  const context = useContext(alertContext);
+  const { showAlert } = context;
+  const baseUrl = "http://localhost:3000/api/auth/createUser";
+  const navigate = useNavigate();
   const [credentials, setCredentials] = useState({
     name: "",
     email: "",
@@ -14,23 +14,29 @@ export const Signup = () => {
   });
   const handleSubmit = async (e) => {
     e.preventDefault();
-     try{const response = await fetch(`${baseUrl}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ name:credentials.name,email:credentials.email, password:credentials.password }),
-    });
-    const json = await response.json();
-    if(json.success){
-        localStorage.setItem("authToken",json.Token)
-         showAlert(json.message,"success")
+    try {
+      const response = await fetch(`${baseUrl}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: credentials.name,
+          email: credentials.email,
+          password: credentials.password,
+        }),
+      });
+      const json = await response.json();
+      if (json.success) {
+        localStorage.setItem("authToken", json.Token);
+        showAlert(json.message, "success");
         navigate("/");
         console.log(json.message);
-    }else{
-         showAlert(json.message,"danger")
-    }}catch(err){
-        console.log(err);
+      } else {
+        showAlert(json.message, "danger");
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
   const onChange = (e) => {
@@ -68,7 +74,7 @@ export const Signup = () => {
               aria-describedby="emailHelp"
               onChange={onChange}
               value={credentials.email}
-               placeholder="Enter your email."
+              placeholder="Enter your email."
             />
           </div>
           <div className="mb-3">

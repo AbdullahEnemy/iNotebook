@@ -1,7 +1,10 @@
 import React from "react";
 import noteContext from "./noteContext";
-import { useState } from "react";
+import { useState,useContext } from "react";
+import alertContext from "../alert/alertContext";
 const NoteState = (props) => {
+    const context = useContext(alertContext);
+    const { showAlert } = context;
   const host = "http://localhost:3000/api/notes/";
   
   const getAllNotes = async () => {
@@ -15,12 +18,6 @@ const NoteState = (props) => {
         },
       });
       const json = await response.json();
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(
-          errorData.message || `HTTP error! status: ${response.status}`
-        );
-      }
       console.log(json);
       const newNotes = json.notes;
       setNotes(newNotes);
@@ -65,12 +62,6 @@ const NoteState = (props) => {
       body: JSON.stringify({ title, description, tag }),
     });
     const json = await response.json();
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(
-        errorData.message || `HTTP error! status: ${response.status}`
-      );
-    }
     console.log(json);
     let newNote = JSON.parse(JSON.stringify(notes));
     for (let idx = 0; idx < newNote.length; idx++) {
@@ -100,12 +91,6 @@ const NoteState = (props) => {
         },
       });
       const json = await response.json();
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(
-          errorData.message || `HTTP error! status: ${response.status}`
-        );
-      }
       console.log(json);
       const newNotes = notes.filter((note) => {
         return note._id !== id;
