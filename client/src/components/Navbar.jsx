@@ -1,16 +1,19 @@
 import React from "react";
-import { useEffect } from "react";
+import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import { ProfileModal } from "./ProfileModal";
 export const Navbar = () => {
   let location = useLocation();
   const navigate = useNavigate();
+   const [showProfile, setShowProfile] = useState(false);
   const handleLogout=()=>{
     localStorage.removeItem("authToken");
     navigate("/login")
   }
   return (
+    <>
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
         <Link className="navbar-brand" to="#">
@@ -69,17 +72,22 @@ export const Navbar = () => {
               </Link>
             </form>
           ) : (
-            <Link
-              className="btn btn-outline-secondary mx-2"
-              to="/login"
-              role="button"
-              onClick={handleLogout}
-            >
-              logout
-            </Link>
+<div className="d-flex">
+                <i className="fa-solid fa-user  mx-2 mt-2" onClick={() => setShowProfile(true)}></i>
+                <Link
+                  className="btn btn-outline-secondary mx-2"
+                  to="/login"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </Link>
+              </div>
           )}
         </div>
       </div>
     </nav>
+     <ProfileModal show={showProfile} handleClose={() => setShowProfile(false)} />
+    </>
+    
   );
 };
