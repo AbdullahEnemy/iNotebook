@@ -59,7 +59,7 @@ const loginHandler =async(req,res)=>{
             email:user.email
         }
     }
-    const authToken=jwt.sign(data,secretToken);
+    const authToken=jwt.sign(data,secretToken,{expiresIn:"12h"});
     success=true;
     return res.status(200).json({message:"User login Successfully",Token:authToken,success});    
     }
