@@ -70,10 +70,13 @@ const loginHandler =async(req,res)=>{
 }
 const getUserHandler=async(req,res)=>{
     try{
+    let success=false;
     const userId=req.user.id;
     const user=await User.findById(userId);
+    success=true;
     return res.status(200).json({
       message: "user found",
+      success,
       name:user.name,
       uid: user._id,
       email: user.email,
@@ -82,7 +85,8 @@ const getUserHandler=async(req,res)=>{
     }
     catch(err){
         console.log(err);
-        return res.status(500).json({message:"An error has occured"});
+         success=false;
+        return res.status(500).json({message:"An error has occured",success});
     }
 
 }
