@@ -1,0 +1,3 @@
+Port=port Number
+JWTSecretToken=your jwt token
+MongoURL=your mongo MongoURLXS
