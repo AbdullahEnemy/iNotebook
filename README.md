@@ -1,12 +1,75 @@
-# React + Vite
+# 📝 iNotebook
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A secure and responsive web-based notebook app built with the **MERN Stack**. iNotebook allows users to create, update, and delete personal notes after authentication. Your notes are stored securely and accessible from anywhere.
 
-Currently, two official plugins are available:
+## 🔧 Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Frontend
+- [React](https://reactjs.org/)
+- [Vite](https://vitejs.dev/) – for lightning-fast development
+- [Bootstrap](https://getbootstrap.com/) – for responsive styling
 
-## Expanding the ESLint configuration
+### Backend
+- [Node.js](https://nodejs.org/)
+- [Express.js](https://expressjs.com/)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Authentication
+- [JWT (JSON Web Tokens)](https://jwt.io/) – for secure authentication and route protection
+
+---
+
+## 🚀 Features
+
+- ✅ User Authentication (Signup/Login with JWT)
+- 🗒️ CRUD operations for notes
+- 🔐 Private user-specific notes
+- ⚡ Fast development experience with Vite
+- 📱 Responsive UI using Bootstrap
+- 📦 RESTful API backend with Express
+
+---
+
+## 🛠️ Installation & Usage
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/AbdullahEnemy/iNotebook.git
+cd iNotebook
+```
+### 2. Install dependencies
+```bash
+npm install
+```
+This installs dependencies for both client and server using a root-level script.
+
+Make sure you have Node.js and npm installed.
+
+### 3. Set up environment variables
+Create a .env file in the root and in /client if needed:
+
+Server .env example:
+```bash
+PORT=Port number
+MONGO_URI=MongoUrl
+JWT_SECRET=your_jwt_secret_key
+```
+## 🧾 Available Scripts
+Run both client and server:
+```bash
+npm run both
+
+This will concurrently start:
+Frontend: Vite dev server at http://localhost:5173
+Backend: Express server at http://localhost:5000
+```
+Run individually:
+```bash
+# Server
+cd server
+npm start
+
+# Client
+cd client
+npm run dev
+
